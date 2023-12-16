@@ -54,5 +54,5 @@ form.addEventListener("submit", search);
 function displayTemp(response) {
   let temperatureElement = document.querySelector("#current-temperature-value");
   let temperature = Math.round(response.data.temperature.current);
-  temperatureElement.innerHTML = `${temperature}`;
+  temperatureElement.innerHTML = `${temperature}°C`;
 }
