@@ -1,0 +1,72 @@
+body {
+  background: linear-gradient(
+    125deg,
+    rgb(255, 253, 251) 0%,
+    rgb(253, 233, 223) 53%
+  );
+  font-family: "Poppins", sans-serif;
+  color: #0881a3;
+}
+
+.container {
+  background-color: #fffdfb;
+  border-radius: 10px;
+  margin: 70px auto;
+  padding: 10px;
+  box-shadow: 0 30px 50px rgba(65, 50, 100, 0.08);
+  max-width: 700px;
+}
+
+form {
+  display: flex;
+  justify-content: right;
+}
+
+.search-input {
+  background-color: #fde9df;
+  border: none;
+  color: rgba(39, 33, 66, 0.4);
+  font-size: 16px;
+  padding: 20px;
+  width: 25%;
+  border-radius: 6px;
+}
+
+.button {
+  margin-left: 5px;
+  font-size: 16px;
+  background-color: #0881a3;
+  color: #fde9df;
+  border: none;
+  padding: 20px;
+  line-height: 1;
+  border-radius: 5px;
+}
+
+.button:hover {
+  background: #ffd6a4;
+  color: #0881a3;
+  cursor: pointer;
+}
+
+.weather-app {
+  display: flex;
+  justify-content: space-around;
+  margin: 5px 30px 30px 30px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 50px;
+  font-weight: 600;
+  padding: 5px auto;
+}
+
+.weather-icon {
+  font-size: 50px;
+}
+
+.me {
+  text-align: center;
+  font-size: 12px;
+}
