@@ -30,9 +30,7 @@ let currentDateELement = document.querySelector("#current-date");
 let currentDate = new Date();
 
 currentDateELement.innerHTML = formatDate(currentDate);
-
 //search bar
-
 function search(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-input");
@@ -51,7 +49,6 @@ function search(event) {
 
 let form = document.querySelector("#search-bar");
 form.addEventListener("submit", search);
-
 // current temperature
 
 function displayTemp(response) {
