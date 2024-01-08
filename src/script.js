@@ -66,4 +66,9 @@ function displayWeather(response) {
   );
   let weatherDescription = response.data.condition.description;
   weatherDescriptionElement.innerHTML = `${weatherDescription}`;
+
+  let iconElement = document.querySelector("#current-weather-image");
+  let icon = response.data.condition.icon_url;
+  iconElement.innerHTML = `<img src=${icon}
+  class="current-weather-image">`;
 }
