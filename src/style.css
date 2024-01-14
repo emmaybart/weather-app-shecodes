@@ -59,11 +59,21 @@ h1 {
   text-align: center;
   font-size: 50px;
   font-weight: 600;
-  padding: 5px auto;
+  padding: 5px 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
-.weather-icon {
+.current-weather-icon {
+  text-align: center;
   font-size: 50px;
+  font-weight: 600;
+  padding: 5px 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.weather-icon {
+  font-size: 60px;
 }
 
 .me {
