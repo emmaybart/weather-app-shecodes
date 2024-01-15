@@ -1,17 +1,31 @@
-//display date and time
+function updateWeather(response) {
+  let temperatureElement = document.querySelector("#temperature");
+  let temperature = response.data.temperature.current;
+  let cityElement = document.querySelector("#city");
+  let conditionELement = document.querySelector("#current-condition");
+  let date = new Date();
+  let timeElement = document.querySelector("#current-time");
+  let amPm = date.toLocaleTimeString([], { timeStyle: "short" });
+  let dayElement = document.querySelector("#current-day");
+  let icon = document.querySelector("#current-weather-icon");
+  let humidity = response.data.temperature.humidity;
+  let humidityElement = document.querySelector("#humidity");
+  let windSpeed = response.data.wind.speed;
+  let windSpeedElement = document.querySelector("#wind-speed");
+
+  temperatureElement.innerHTML = Math.round(temperature);
+  cityElement.innerHTML = response.data.city;
+  conditionELement.innerHTML = response.data.condition.description;
+  timeElement.innerHTML = amPm;
+  dayElement.innerHTML = formatDate(date);
+  icon.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
+  humidityElement.innerHTML = `${humidity}%`;
+  windSpeedElement.innerHTML = `${windSpeed} km/h`;
+}
+
 function formatDate(date) {
-  let minutes = date.getMinutes();
   let hours = date.getHours();
-  let day = date.getDay();
-
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
-
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
-
+  let minutes = date.getMinutes();
   let days = [
     "Sunday",
     "Monday",
@@ -20,53 +34,26 @@ function formatDate(date) {
     "Thursday",
     "Friday",
     "Saturday",
+    "Sunday",
   ];
+  let day = days[date.getDay()];
 
-  let formattedDay = days[day];
-  return `${formattedDay} ${hours}:${minutes}`;
+  return day;
 }
 
-let currentDateELement = document.querySelector("#current-date");
-let currentDate = new Date();
-
-currentDateELement.innerHTML = formatDate(currentDate);
-//search bar
-function search(event) {
-  event.preventDefault();
-  let searchInput = document.querySelector("#search-input");
-  let cityElement = document.querySelector("#current-city");
-
-  if (searchInput.value) {
-    cityElement.innerHTML = `${searchInput.value}`;
-  } else {
-    cityElement.innerHTML = null;
-    alert("Please search for a city!🗺");
-  }
+function searchCity(city) {
   let apiKey = "443o50f2b2b7f52caatbcb5a0d99f0f6";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${searchInput.value}}&key=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayWeather);
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(updateWeather);
 }
 
-let form = document.querySelector("#search-bar");
-form.addEventListener("submit", search);
-// current temperature
-
-function displayWeather(response) {
-  let temperatureElement = document.querySelector("#current-temperature-value");
-  let temperature = Math.round(response.data.temperature.current);
-  temperatureElement.innerHTML = `${temperature}`;
-  let windSpeedElement = document.querySelector("#current-windspeed-value");
-  let windSpeed = response.data.wind.speed;
-  windSpeedElement.innerHTML = `${windSpeed}`;
-  let humidityElement = document.querySelector("#current-humidity-value");
-  let humidity = response.data.temperature.humidity;
-  humidityElement.innerHTML = `${humidity}`;
-  let weatherDescriptionElement = document.querySelector(
-    "#current-weather-description"
-  );
-  let weatherDescription = response.data.condition.description;
-  weatherDescriptionElement.innerHTML = `${weatherDescription}`;
-
-  let iconElement = document.querySelector("#current-weather-icon");
-  iconElement.innerHTML = `<img src="${response.data.condition.icon_url}"/>`;
+function handleSearchInput(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#search-form-input");
+  searchCity(searchInput.value);
 }
+
+let searchFormElement = document.querySelector("#search-form");
+searchFormElement.addEventListener("submit", handleSearchInput);
+
+searchCity("Southampton");
