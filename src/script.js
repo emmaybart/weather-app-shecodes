@@ -58,8 +58,26 @@ searchFormElement.addEventListener("submit", handleSearchInput);
 
 searchCity("Southampton");
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
 
+  let forecastDay = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  let forecastHtml = "";
 
+  forecastDay.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `<div class="col-2">
+                <div class="weather-forecast-date">${day}</div>
+                <img src="images/broken-clouds-day.png" alt="" width="42">
+                <div class="weather-forecast-temperature">
+                  <span class="weather-forecast-temperature-max">18</span> 
+                  <span class="weather-forecast-temperature-min">12</span>
+                </div>
+              </div>
+              `;
+  });
+  forecastElement.innerHTML = forecastHtml;
+}
 
-
-
+displayForecast();
