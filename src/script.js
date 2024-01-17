@@ -20,7 +20,7 @@ function updateWeather(response) {
   dayElement.innerHTML = formatDate(date);
   icon.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
   humidityElement.innerHTML = `${humidity}%`;
-  windSpeedElement.innerHTML = `${windSpeed} km/h`;
+  windSpeedElement.innerHTML = `${windSpeed} mph`;
 }
 
 function formatDate(date) {
@@ -57,3 +57,9 @@ let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchInput);
 
 searchCity("Southampton");
+
+
+
+
+
+

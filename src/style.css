@@ -57,7 +57,6 @@ h1 {
 .current-temperature-value {
   font-size: 70px;
   font-weight: 500;
-  margin-top: 10px;
 }
 .current-temperature-unit {
   font-size: 30px;
@@ -68,13 +67,7 @@ h1 {
   height: 100px;
   width: 100px;
 }
-.week-forecast-section {
-  background-color: #202b3b;
-  max-width: 95%;
-  padding: 10px 20px;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
+
 h4 {
   font-size: 14px;
   font-weight: 400;
@@ -111,4 +104,32 @@ footer {
 
 a {
   color: #d1c5f1;
+}
+
+.week-forecast-section {
+  background-color: #202b3b;
+  max-width: 95%;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  color: #b6b9bc;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.weather-forecast-date {
+  font-size: 15px;
+  text-align: center;
+}
+
+.weather-forecast-temperature {
+  font-size: 13px;
+  text-align: center;
+}
+
+.weather-forecast-temperature-min {
+  opacity: 0.6;
 }
