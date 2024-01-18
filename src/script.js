@@ -21,6 +21,8 @@ function updateWeather(response) {
   icon.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
   humidityElement.innerHTML = `${humidity}%`;
   windSpeedElement.innerHTML = `${windSpeed} mph`;
+
+  getForecast(response.data.city);
 }
 
 function formatDate(date) {
@@ -41,6 +43,12 @@ function formatDate(date) {
   return day;
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[date.getDay()];
+}
+
 function searchCity(city) {
   let apiKey = "443o50f2b2b7f52caatbcb5a0d99f0f6";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
@@ -56,28 +64,36 @@ function handleSearchInput(event) {
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchInput);
 
-searchCity("Southampton");
+function getForecast(city) {
+  let apiKey = "443o50f2b2b7f52caatbcb5a0d99f0f6";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios(apiUrl).then(displayForecast);
+}
 
-function displayForecast() {
+function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
 
-  let forecastDay = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   let forecastHtml = "";
-
-  forecastDay.forEach(function (day) {
-    forecastHtml =
-      forecastHtml +
-      `<div class="col-2">
-                <div class="weather-forecast-date">${day}</div>
-                <img src="images/broken-clouds-day.png" alt="" width="42">
+  response.data.daily.forEach(function (day, index) {
+    if (index < 5) {
+      forecastHtml =
+        forecastHtml +
+        `<div class="col-2">
+                <div class="weather-forecast-date">${formatDay(day.time)}</div>
+                <img src="${day.condition.icon_url}" alt="" width="42">
                 <div class="weather-forecast-temperature">
-                  <span class="weather-forecast-temperature-max">18</span> 
-                  <span class="weather-forecast-temperature-min">12</span>
+                  <span class="weather-forecast-temperature-max">${Math.round(
+                    day.temperature.maximum
+                  )}°</span> 
+                  <span class="weather-forecast-temperature-min">${Math.round(
+                    day.temperature.minimum
+                  )}°</span>
                 </div>
               </div>
               `;
+    }
   });
   forecastElement.innerHTML = forecastHtml;
 }
 
-displayForecast();
+searchCity("Southampton");
