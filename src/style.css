@@ -30,6 +30,18 @@ body {
   padding: 10px 20px;
   font-size: 14px;
   margin-left: 5px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.search-form-button:hover {
+  background-color: #b6b9bc;
+  color: #202b3b;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 14px;
+  margin-left: 5px;
 }
 main {
   padding: 30px 30px 20px 30px;
